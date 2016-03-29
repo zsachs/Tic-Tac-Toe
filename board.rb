@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+
 class Board
+
 	attr_accessor :board
+	
 	def initialize(args)
 		args = defaults.merge(args)
 		@board = args[:board]
@@ -16,27 +19,29 @@ class Board
 
 	def valid_spots
 		valid_spots = []
-		self.board.each_with_index do |spot, index|
+
+		board.each_with_index do |spot, index|
 			if spot != 'X' && spot != 'O'
 				valid_spots.push(index)
 			end
 		end
+
 		return valid_spots
 	end
 
 	def mark(spot, marker)
-		self.board[spot-1] = marker
+		board[spot-1] = marker
 	end
 
 	def win?
-		if self.board[0..2].uniq.length == 1 ||
-			self.board[3..5].uniq.length == 1 ||
-			self.board[6..8].uniq.length == 1 ||
-			[self.board[0], self.board[3], self.board[6]].uniq.length == 1 ||
-			[self.board[1], self.board[4], self.board[7]].uniq.length == 1 ||
-			[self.board[2], self.board[5], self.board[8]].uniq.length == 1 ||
-			[self.board[0], self.board[4], self.board[8]].uniq.length == 1 ||
-			[self.board[2], self.board[4], self.board[6]].uniq.length == 1
+		if board[0..2].uniq.length == 1 ||
+			board[3..5].uniq.length == 1 ||
+			board[6..8].uniq.length == 1 ||
+			[board[0], board[3], board[6]].uniq.length == 1 ||
+			[board[1], board[4], board[7]].uniq.length == 1 ||
+			[board[2], board[5], board[8]].uniq.length == 1 ||
+			[board[0], board[4], board[8]].uniq.length == 1 ||
+			[board[2], board[4], board[6]].uniq.length == 1
 			true
 		else
 			false
@@ -44,10 +49,10 @@ class Board
 	end
 
 	def draw?
-		if self.win?
+		if win?
 			false
 		else
-			self.board.all? {|b| b == 'X' || b == 'O' }
+			board.all? {|b| b == 'X' || b == 'O' }
 		end
 	end
 end
